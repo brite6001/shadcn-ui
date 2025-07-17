@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ofertas laborales - MiSaaS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                600: '#2563eb',
+                700: '#1d4ed8',
+              },
+              secondary: {
+                600: '#7c3aed',
+              },
+              dark: {
+                800: '#1e293b'
+              }
+            },
+            boxShadow: {
+              'job-card': '0 2px 8px rgba(0,0,0,0.08)',
+              'job-card-hover': '0 4px 12px rgba(0,0,0,0.12)'
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Barra de navegación -->
+    <header class="bg-white shadow-sm sticky top-0 z-20">
+      <div class="container mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl font-bold text-primary-600 flex items-center">
+            <i class="fas fa-cloud mr-2"></i>MiSaaS
+          </span>
+          <nav class="hidden md:flex items-center gap-1 ml-6">
+            <a href="#" class="px-3 py-1 text-gray-700 hover:text-primary-600">Inicio</a>
+            <a href="#" class="px-3 py-1 text-primary-600 font-medium border-b-2 border-primary-600">Empleos</a>
+            <a href="#" class="px-3 py-1 text-gray-700 hover:text-primary-600">Empresas</a>
+            <a href="#" class="px-3 py-1 text-gray-700 hover:text-primary-600">Recursos</a>
+          </nav>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="hidden md:flex gap-3">
+            <button class="text-gray-600 hover:text-primary-600">
+              <i class="far fa-bell text-lg"></i>
+            </button>
+            <button class="text-gray-600 hover:text-primary-600">
+              <i class="far fa-envelope text-lg"></i>
+            </button>
+          </div>
+          <div class="relative">
+            <button class="flex items-center gap-2 text-gray-700 hover:text-primary-600">
+              <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-600">
+                <i class="fas fa-user"></i>
+              </div>
+              <span class="hidden md:inline">Mi cuenta</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <!-- Menú desplegable -->
+            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 hidden">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Aplicaciones</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configuración</a>
+              <div class="border-t border-gray-200 my-1"></div>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Barra de búsqueda avanzada -->
+    <div class="bg-dark-800 text-white py-6">
+      <div class="container mx-auto px-4">
+        <h2 class="text-xl font-bold mb-4">Encuentra tu trabajo ideal</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-sm text-gray-300 mb-1">¿Qué estás buscando?</label>
+            <div class="relative">
+              <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+              <input type="text" placeholder="Puesto, habilidades" class="pl-10 pr-4 py-2 rounded-lg w-full bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-primary-600">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1">Ubicación</label>
+            <div class="relative">
+              <i class="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"></i>
+              <input type="text" placeholder="Ciudad, país o remoto" class="pl-10 pr-4 py-2 rounded-lg w-full bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-primary-600">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1">Tipo de trabajo</label>
+            <select class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-primary-600">
+              <option>Todos los tipos</option>
+              <option>Tiempo completo</option>
+              <option>Medio tiempo</option>
+              <option>Contrato</option>
+              <option>Freelance</option>
+            </select>
+          </div>
+          <div class="flex items-end">
+            <button class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg w-full h-[42px] transition-colors">
+              Buscar empleos
+            </button>
+          </div>
+        </div>
+        
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a href="#" class="text-sm text-gray-300 hover:text-white hover:underline">Trabajos remotos</a>
+          <span class="text-gray-500">•</span>
+          <a href="#" class="text-sm text-gray-300 hover:text-white hover:underline">Trabajos en Buenos Aires</a>
+          <span class="text-gray-500">•</span>
+          <a href="#" class="text-sm text-gray-300 hover:text-white hover:underline">Trabajos para desarrolladores</a>
+          <span class="text-gray-500">•</span>
+          <a href="#" class="text-sm text-gray-300 hover:text-white hover:underline">Trabajos recientes</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="flex flex-col lg:flex-row min-h-[calc(100vh-68px)] container mx-auto">
+      
+      <!-- Filtros y lista de empleos -->
+      <aside class="w-full lg:w-1/3 xl:w-1/4 bg-white border-r overflow-y-auto">
+        <!-- Filtros -->
+        <div class="p-4 border-b">
+          <div class="flex justify-between items-center">
+            <h2 class="text-lg font-semibold">Filtros</h2>
+            <button class="text-sm text-primary-600 hover:underline">Limpiar todo</button>
+          </div>
+          
+          <div class="mt-4 space-y-4">
+            <div>
+              <h3 class="font-medium text-sm mb-2">Tipo de empleo</h3>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Tiempo completo</span>
+                  <span class="text-gray-500 text-sm ml-auto">(24)</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2" checked>
+                  <span>Medio tiempo</span>
+                  <span class="text-gray-500 text-sm ml-auto">(12)</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Contrato</span>
+                  <span class="text-gray-500 text-sm ml-auto">(8)</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Freelance</span>
+                  <span class="text-gray-500 text-sm ml-auto">(5)</span>
+                </label>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="font-medium text-sm mb-2">Nivel de experiencia</h3>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Junior</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2" checked>
+                  <span>Mid-level</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Senior</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Liderazgo</span>
+                </label>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="font-medium text-sm mb-2">Modalidad</h3>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2" checked>
+                  <span>Remoto</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Híbrido</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>Presencial</span>
+                </label>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="font-medium text-sm mb-2">Salario estimado</h3>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>USD 2k-4k</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>USD 4k-6k</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2" checked>
+                  <span>USD 6k-8k</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="rounded text-primary-600 mr-2">
+                  <span>USD 8k+</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Lista de empleos -->
+        <div class="p-4 border-b">
+          <div class="flex justify-between items-center">
+            <h2 class="text-lg font-semibold flex items-center gap-2">
+              <i class="fas fa-briefcase text-primary-600"></i>
+              <span>Ofertas disponibles <span class="text-gray-500 text-sm">(24)</span></span>
+            </h2>
+            <div class="flex items-center gap-2">
+              <button class="text-gray-500 hover:text-primary-600">
+                <i class="fas fa-sliders-h"></i>
+              </button>
+              <button class="text-gray-500 hover:text-primary-600">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-sm text-gray-500">Ordenar por:</span>
+            <select class="text-sm border-none bg-transparent text-primary-600 focus:ring-0 p-0">
+              <option>Relevancia</option>
+              <option>Fecha de publicación</option>
+              <option>Salario estimado</option>
+            </select>
+          </div>
+        </div>
+        
+        <ul class="divide-y divide-gray-100">
+          <li class="p-4 hover:bg-gray-50 cursor-pointer group transition-colors duration-150">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-semibold text-gray-900 group-hover:text-primary-600">Senior Full Stack Engineer</h3>
+                <p class="text-sm text-gray-600 mt-1">MiSaaS • Tecnología</p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Node.js</span>
+                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">React</span>
+                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">TypeScript</span>
+                </div>
+              </div>
+              <div class="flex flex-col items-end">
+                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full mb-2">Nuevo</span>
+                <button class="text-gray-400 hover:text-primary-600">
+                  <i class="far fa-bookmark"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center mt-3 text-xs text-gray-500">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>Buenos Aires, Argentina</span>
+              <span class="mx-2">•</span>
+              <i class="fas fa-clock mr-1"></i>
+              <span>Tiempo completo</span>
+            </div>
+            <div class="flex items-center mt-2 text-sm">
+              <span class="text-gray-900 font-medium">USD 6k-8k/mes</span>
+              <span class="mx-2">•</span>
+              <span class="text-gray-500">Hace 2 días</span>
+            </div>
+          </li>
+          
+          <li class="p-4 hover:bg-gray-50 cursor-pointer group transition-colors duration-150">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-semibold text-gray-900 group-hover:text-primary-600">IT Engineer</h3>
+                <p class="text-sm text-gray-600 mt-1">MiSaaS • Infraestructura</p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">AWS</span>
+                  <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Terraform</span>
+                  <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Kubernetes</span>
+                </div>
+              </div>
+              <div class="flex flex-col items-end">
+                <button class="text-gray-400 hover:text-primary-600">
+                  <i class="far fa-bookmark"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center mt-3 text-xs text-gray-500">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>Remoto, LATAM</span>
+              <span class="mx-2">•</span>
+              <i class="fas fa-clock mr-1"></i>
+              <span>Medio tiempo</span>
+            </div>
+            <div class="flex items-center mt-2 text-sm">
+              <span class="text-gray-900 font-medium">USD 4k-6k/mes</span>
+              <span class="mx-2">•</span>
+              <span class="text-gray-500">Hace 1 semana</span>
+            </div>
+          </li>
+          
+          <li class="p-4 hover:bg-gray-50 cursor-pointer group transition-colors duration-150">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-semibold text-gray-900 group-hover:text-primary-600">Reports Team Lead</h3>
+                <p class="text-sm text-gray-600 mt-1">MiSaaS • Business Intelligence</p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded">SQL</span>
+                  <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded">Power BI</span>
+                  <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded">Gestión</span>
+                </div>
+              </div>
+              <div class="flex flex-col items-end">
+                <button class="text-gray-400 hover:text-primary-600">
+                  <i class="far fa-bookmark"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center mt-3 text-xs text-gray-500">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>LATAM</span>
+              <span class="mx-2">•</span>
+              <i class="fas fa-clock mr-1"></i>
+              <span>Tiempo completo</span>
+            </div>
+            <div class="flex items-center mt-2 text-sm">
+              <span class="text-gray-900 font-medium">USD 5k-7k/mes</span>
+              <span class="mx-2">•</span>
+              <span class="text-gray-500">Hace 3 días</span>
+            </div>
+          </li>
+          
+          <li class="p-4 hover:bg-gray-50 cursor-pointer group transition-colors duration-150">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-semibold text-gray-900 group-hover:text-primary-600">UX Designer</h3>
+                <p class="text-sm text-gray-600 mt-1">MiSaaS • Producto</p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Figma</span>
+                  <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Research</span>
+                  <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">UI/UX</span>
+                </div>
+              </div>
+              <div class="flex flex-col items-end">
+                <button class="text-gray-400 hover:text-primary-600">
+                  <i class="far fa-bookmark"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center mt-3 text-xs text-gray-500">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>Remoto</span>
+              <span class="mx-2">•</span>
+              <i class="fas fa-clock mr-1"></i>
+              <span>Contrato</span>
+            </div>
+            <div class="flex items-center mt-2 text-sm">
+              <span class="text-gray-900 font-medium">USD 3.5k-5k/mes</span>
+              <span class="mx-2">•</span>
+              <span class="text-gray-500">Hace 5 días</span>
+            </div>
+          </li>
+        </ul>
+        
+        <div class="p-4 border-t flex justify-center">
+          <button class="text-primary-600 hover:text-primary-700 font-medium flex items-center gap-2">
+            Ver más empleos
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Detalle del empleo -->
+      <main class="flex-1 p-6 lg:p-8 overflow-y-auto bg-gray-50">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6 lg:p-8">
+          <!-- Encabezado del empleo -->
+          <div class="flex flex-col md:flex-row justify-between gap-6">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
+                  <i class="fas fa-briefcase text-xl"></i>
+                </div>
+                <div>
+                  <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Senior Full Stack Engineer</h1>
+                  <p class="text-gray-600">MiSaaS • Departamento de Tecnología</p>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap items-center gap-3 mt-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  <i class="fas fa-laptop-code mr-1"></i> Desarrollo
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                  <i class="fas fa-bolt mr-1"></i> Alta prioridad
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                  <i class="fas fa-user-tie mr-1"></i> Senior
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Publicado hace 2 días</span>
+                <button class="text-gray-400 hover:text-primary-600 ml-auto">
+                  <i class="far fa-bookmark text-lg"></i>
+                </button>
+                <button class="text-gray-400 hover:text-primary-600">
+                  <i class="fas fa-share-alt text-lg"></i>
+                </button>
+              </div>
+              
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-dollar-sign text-gray-500"></i>
+                  <span class="font-medium">Salario:</span>
+                  <span>USD 6,000 - 8,000/mes</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm mt-1">
+                  <i class="fas fa-map-marker-alt text-gray-500"></i>
+                  <span class="font-medium">Ubicación:</span>
+                  <span>Buenos Aires, Argentina (Híbrido)</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm mt-1">
+                  <i class="fas fa-clock text-gray-500"></i>
+                  <span class="font-medium">Tipo:</span>
+                  <span>Tiempo completo</span>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap gap-3">
+                <button class="flex-1 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
+                  <i class="fas fa-paper-plane"></i>
+                  Aplicar ahora
+                </button>
+                <button class="flex-1 border border-gray-300 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                  <i class="far fa-envelope"></i>
+                  Contactar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-6 border-gray-200" />
+
+          <!-- Contenido principal -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+              <!-- Descripción del puesto -->
+              <div class="prose max-w-none">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Descripción del puesto</h2>
+                <p>
+                  En MiSaaS, estamos transformando la forma en que las empresas gestionan sus recursos humanos a nivel global. Como Senior Full Stack Engineer, serás parte fundamental de nuestro equipo de producto, desarrollando características innovadoras que impactan a miles de usuarios en más de 100 países.
+                </p>
+                
+                <h3 class="font-semibold mt-6 mb-2">Lo que harás:</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                  <li>Diseñar y desarrollar nuevas funcionalidades para nuestra plataforma SaaS usando Node.js, React y TypeScript</li>
+                  <li>Optimizar el rendimiento y escalabilidad de nuestra aplicación principal</li>
+                  <li>Colaborar con equipos cross-funcionales (Producto, Diseño, QA) para entregar soluciones de alta calidad</li>
+                  <li>Implementar pruebas automatizadas y participar en revisiones de código</li>
+                  <li>Investigar e implementar nuevas tecnologías que mejoren nuestro stack técnico</li>
+                  <li>Mentorar a desarrolladores junior y compartir conocimientos con el equipo</li>
+                </ul>
+                
+                <h3 class="font-semibold mt-6 mb-2">Lo que buscamos:</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                  <li>5+ años de experiencia en desarrollo Full Stack</li>
+                  <li>Experiencia avanzada con Node.js, React y TypeScript</li>
+                  <li>Conocimientos profundos de bases de datos relacionales y no relacionales</li>
+                  <li>Experiencia con arquitecturas de microservicios y APIs (REST/GraphQL)</li>
+                  <li>Conocimientos de Docker, Kubernetes y CI/CD</li>
+                  <li>Experiencia con AWS u otros proveedores cloud</li>
+                  <li>Inglés avanzado (nuestro equipo es global)</li>
+                  <li>Capacidad para trabajar en equipo y comunicar ideas técnicas</li>
+                </ul>
+                
+                <h3 class="font-semibold mt-6 mb-2">Lo que ofrecemos:</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                  <li><strong>Salario competitivo en USD</strong> + bonos por desempeño</li>
+                  <li><strong>Trabajo híbrido flexible</strong> (2 días en oficina, 3 remotos)</li>
+                  <li>Equipo internacional con oportunidades de crecimiento</li>
+                  <li>Presupuesto anual para capacitaciones y conferencias</li>
+                  <li>Seguro médico premium y otros beneficios</li>
+                  <li>Licencias pagas generosas y días flexibles</li>
+                  <li>Equipo moderno y espacio de trabajo ergonómico</li>
+                </ul>
+                
+                <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                  <h3 class="font-semibold text-blue-800 mb-2 flex items-center gap-2">
+                    <i class="fas fa-info-circle"></i>
+                    Proceso de selección
+                  </h3>
+                  <ol class="list-decimal pl-5 space-y-2 text-blue-800">
+                    <li>Revisión de CV (1-3 días)</li>
+                    <li>Entrevista inicial con RRHH (30 min)</li>
+                    <li>Prueba técnica (opcional)</li>
+                    <li>Entrevista técnica (1 hora)</li>
+                    <li>Entrevista con equipo de producto (1 hora)</li>
+                    <li>Oferta (todo el proceso toma 2-3 semanas)</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Sidebar con información adicional -->
+            <div class="space-y-6">
+              <!-- Sobre la empresa -->
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h3 class="font-semibold mb-3 flex items-center gap-2">
+                  <i class="fas fa-building text-primary-600"></i>
+                  Sobre MiSaaS
+                </h3>
+                <p class="text-sm text-gray-700 mb-3">
+                  MiSaaS es la plataforma líder en gestión de RRHH y nóminas para equipos distribuidos globalmente. Conectamos talento con empresas sin importar fronteras, operando en más de 100 países.
+                </p>
+                <div class="flex items-center gap-2 text-sm text-gray-600">
+                  <i class="fas fa-users"></i>
+                  <span>51-200 empleados</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-gray-600 mt-1">
+                  <i class="fas fa-globe"></i>
+                  <span>www.misaas.com</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-gray-600 mt-1">
+                  <i class="fas fa-calendar-alt"></i>
+                  <span>Fundada en 2018</span>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-gray-200">
+                  <h4 class="text-xs font-semibold text-gray-500 uppercase mb-2">Tecnologías principales</h4>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Node.js</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">React</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">PostgreSQL</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">AWS</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Kubernetes</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Ubicación -->
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h3 class="font-semibold mb-3 flex items-center gap-2">
+                  <i class="fas fa-map-marker-alt text-primary-600"></i>
+                  Ubicación
+                </h3>
+                <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden mb-3">
+                  <!-- Mapa placeholder -->
+                  <div class="w-full h-full flex items-center justify-center text-gray-400">
+                    <i class="fas fa-map text-3xl"></i>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-700">
+                  <strong>Oficina principal:</strong> Av. Corrientes 1234, Buenos Aires, Argentina
+                </p>
+                <p class="text-sm text-gray-500 mt-1">
+                  Modelo híbrido (2 días en oficina, 3 remotos)
+                </p>
+              </div>
+              
+              <!-- Empleos similares -->
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h3 class="font-semibold mb-3 flex items-center gap-2">
+                  <i class="fas fa-briefcase text-primary-600"></i>
+                  Empleos similares
+                </h3>
+                <ul class="space-y-3">
+                  <li class="p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <a href="#" class="block">
+                      <h4 class="font-medium text-gray-900 hover:text-primary-600">Backend Engineer (Node.js)</h4>
+                      <p class="text-sm text-gray-600">MiSaaS • Tecnología</p>
+                      <div class="flex items-center mt-1 text-xs text-gray-500">
+                        <span>Remoto</span>
+                        <span class="mx-2">•</span>
+                        <span>USD 5k-7k/mes</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <a href="#" class="block">
+                      <h4 class="font-medium text-gray-900 hover:text-primary-600">Frontend Lead (React)</h4>
+                      <p class="text-sm text-gray-600">OtraEmpresa • Producto</p>
+                      <div class="flex items-center mt-1 text-xs text-gray-500">
+                        <span>Buenos Aires</span>
+                        <span class="mx-2">•</span>
+                        <span>USD 6k-8k/mes</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <a href="#" class="block">
+                      <h4 class="font-medium text-gray-900 hover:text-primary-600">Full Stack Developer</h4>
+                      <p class="text-sm text-gray-600">StartupTech • Desarrollo</p>
+                      <div class="flex items-center mt-1 text-xs text-gray-500">
+                        <span>Remoto</span>
+                        <span class="mx-2">•</span>
+                        <span>USD 4k-6k/mes</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <a href="#" class="inline-block mt-3 text-sm text-primary-600 hover:underline">
+                  Ver más empleos similares
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- CTA final -->
+          <div class="mt-12 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-xl p-6 text-white">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-2">¿Listo para unirte a nuestro equipo?</h3>
+                <p class="opacity-90">Postúlate ahora y comienza tu viaje con MiSaaS</p>
+              </div>
+              <div class="flex gap-3">
+                <button class="bg-white text-primary-600 px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium">
+                  Aplicar ahora
+                </button>
+                <button class="bg-transparent border border-white text-white px-6 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors font-medium">
+                  Contactar reclutador
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-lg font-bold mb-4 flex items-center">
+              <i class="fas fa-cloud mr-2"></i>MiSaaS
+            </h3>
+            <p class="text-gray-400 text-sm">
+              Conectando talento con oportunidades sin fronteras. La plataforma líder en empleos tech para LATAM.
+            </p>
+            <div class="flex gap-4 mt-4">
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold mb-4">Para candidatos</h4>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li><a href="#" class="hover:text-white transition-colors">Buscar empleos</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Perfil profesional</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Alertas de empleo</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Guía de CV</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Preguntas frecuentes</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold mb-4">Para empresas</h4>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li><a href="#" class="hover:text-white transition-colors">Publicar empleos</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Buscar candidatos</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Soluciones empresariales</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Precios</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Recursos para empleadores</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold mb-4">Contacto</h4>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li class="flex items-center gap-2">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Av. Corrientes 1234, Buenos Aires</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-phone-alt"></i>
+                <span>+54 11 1234-5678</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-envelope"></i>
+                <span>hola@misaas.com</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-clock"></i>
+                <span>Lun-Vie, 9am-6pm</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+          <p class="text-sm text-gray-500 mb-4 md:mb-0">
+            © 2023 MiSaaS. Todos los derechos reservados.
+          </p>
+          <div class="flex gap-6">
+            <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">Términos</a>
+            <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">Privacidad</a>
+            <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
